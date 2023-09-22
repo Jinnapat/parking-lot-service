@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.viewParkingLot";
+option java_outer_classname = "ViewParkingLotProto";
+option objc_class_prefix = "RTG";
+
+package viewparkinglot;
+
+service ViewParkingLot {
+    rpc viewParkingLot(ParkingLotRequest) returns (ParkingLotResponse);
+}
+
+message ParkingLotRequest {
+    int32 id = 1;
+}
+
+message ParkingLotResponse {
+    int32 id = 1;
+    string name = 2;
+    int32 available = 3;
+}

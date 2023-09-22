@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var manageParkingLot_1 = require("./services/manageParkingLot");
+var viewParkingLots_1 = require("./services/viewParkingLots");
+var getParkingLotInfo_1 = require("./services/getParkingLotInfo");
+var mongoose_1 = require("mongoose");
+mongoose_1.default.set("strictQuery", true);
+mongoose_1.default.connect("http:localhost:27017");
+var db = mongoose_1.default.connection;
+db.on("error", function (error) { return console.log(error); });
+db.once("open", function () { return console.log("Conneted to database"); });
+var app = (0, express_1.default)();
+var port = process.env.PORT || 3000;
+app.post("/manageParkingLot", manageParkingLot_1.manageParkingLotHandler);
+app.post("/viewParkingLots", viewParkingLots_1.viewParkingLotsHandler);
+app.get("/getParkingLotInfo", getParkingLotInfo_1.getParkingLotInfoHandler);
+app.listen(port, function () {
+    console.log("Server running at http://localhost:".concat(port));
+});
